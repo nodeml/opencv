@@ -1,0 +1,29 @@
+#pragma once
+
+#include <opencv2/core.hpp>
+#include <opencv2/imgcodecs.hpp>
+#include <opencv2/highgui.hpp>
+
+#include <napi.h>
+
+namespace nodeml_opencv
+{
+    class Mat : public Napi::ObjectWrap<Mat>
+    {
+
+    public:
+        static Napi::FunctionReference constructor;
+
+        cv::Mat mat;
+
+        static Napi::Object Init(Napi::Env env, Napi::Object exports);
+
+        Mat(const Napi::CallbackInfo &info);
+
+        Napi::Value Shape(const Napi::CallbackInfo &info);
+
+        Napi::Value toString(const Napi::CallbackInfo &info);
+
+        static Napi::Object FromCv2Mat(const Napi::CallbackInfo &info, cv::Mat &cvMat);
+    };
+}
