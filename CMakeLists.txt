@@ -15,7 +15,7 @@ list(APPEND CMAKE_PREFIX_PATH)
 
 
 # Build a shared library named after the project from the files in `src/`
-file(GLOB SOURCE_FILES "src/*.cc" "src/*.h")
+file(GLOB_RECURSE SOURCE_FILES "src/*.cc" "src/*.h")
 
 add_library(${PROJECT_NAME} SHARED ${SOURCE_FILES} ${CMAKE_JS_SRC} ${NODEML_TORCH_SOURCE_FILES})
 
@@ -26,6 +26,12 @@ set_target_properties(${PROJECT_NAME} PROPERTIES PREFIX "" SUFFIX ".node")
 # You should add this line in every CMake.js based project
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_JS_INC})
 
+target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/src)
+
+# Node lib
+if(MSVC AND CMAKE_JS_NODELIB_DEF AND CMAKE_JS_NODELIB_TARGET)
+  execute_process(COMMAND ${CMAKE_AR} /def:${CMAKE_JS_NODELIB_DEF} /out:${CMAKE_JS_NODELIB_TARGET} ${CMAKE_STATIC_LINKER_FLAGS})
+endif()
 
 # Include N-API wrappers
 IncludeNapi(${PROJECT_NAME})

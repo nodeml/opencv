@@ -10,7 +10,7 @@ namespace nodeml_opencv
         std::vector<T> napiArrayToVector(const Napi::Array &arr);
 
         template <typename T>
-        std::vector<T> vectorToNapiArray(const Napi::CallbackInfo &info);
+        Napi::Array vectorToNapiArray(Napi::Env env, std::vector<T> vec);
 
         Napi::Object Init(Napi::Env env, Napi::Object exports);
     }

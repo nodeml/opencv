@@ -1,17 +1,23 @@
 {
-  "name": "@nodeml/torchvision",
+  "name": "@nodeml/opencv",
   "version": "1.0.0",
-  "description": "",
+  "description": "Minimal opencv bindings for NodeJs. Functionality is added when needed",
   "main": "./lib/index.js",
   "typings": "./lib/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nodeml/opencv.git"
+  },
   "scripts": {
-    "start": "node ./dist/index.js",
+    "start": "node ./test.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npm run clean && npx tsc --declaration",
-    "watch": "npm run clean && npx tsc --watch --declaration",
+    "build": "cmake-js rebuild",
+    "compile": "cmake-js compile",
     "pretty": "npx prettier --write .",
     "clean": "node ./scripts/clean.js",
-    "install": "cmake-js compile --CDDCMAKE_EXPORT_COMPILE_COMMANDS=1"
+    "install": "prebuild-install -r napi || npm run build",
+    "installd": "cmake-js compile --debug",
+    "prebuild": "prebuild --backend cmake-js --include-regex \"\\.[nsd][oyl][dl]?[ie]?b?$\" -r napi"
   },
   "author": "",
   "license": "ISC",
@@ -28,13 +34,19 @@
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-n": "^15.2.0",
     "eslint-plugin-promise": "^6.0.0",
-    "prettier": "2.7.1"
+    "prettier": "2.7.1",
+    "typescript": "^5.2.2"
   },
   "dependencies": {
-    "@nodeml/torch": "github:nodeml/torch",
     "bindings": "^1.5.0",
     "cmake-js": "^7.2.1",
     "node-addon-api": "^7.0.0",
-    "typescript": "^4.9.3"
+    "prebuild": "^12.1.0",
+    "prebuild-install": "^7.1.1"
+  },
+  "binary": {
+    "napi_versions": [
+      7
+    ]
   }
 }

@@ -20,10 +20,20 @@ namespace nodeml_opencv
 
         Mat(const Napi::CallbackInfo &info);
 
+        Napi::Value Clone(const Napi::CallbackInfo &info);
+
+        Napi::Value ToArray(const Napi::CallbackInfo &info);
+
         Napi::Value Shape(const Napi::CallbackInfo &info);
 
         Napi::Value toString(const Napi::CallbackInfo &info);
 
-        static Napi::Object FromCv2Mat(const Napi::CallbackInfo &info, cv::Mat &cvMat);
+        Napi::Value GetSection(const Napi::CallbackInfo &info);
+
+        static Napi::Object FromCv2Mat(Napi::Env env, cv::Mat &cvMat);
+
+        static Mat *FromObject(Napi::Value value);
+
+        static Napi::Value FromTypedArray(const Napi::CallbackInfo &info);
     };
 }
