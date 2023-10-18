@@ -26,7 +26,7 @@ namespace nodeml_opencv
 		auto channels = info[2 + offset].ToNumber().Int32Value();
 		auto type = CV_8UC(channels);
 
-		mat = cv::Mat(width, height, type);
+		mat = cv::Mat(height,width, type);
 
 		if (isTyped)
 		{
