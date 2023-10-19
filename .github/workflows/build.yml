@@ -1,4 +1,4 @@
-name: Test
+name: Build
 
 on: [push, pull_request]
 
@@ -20,7 +20,18 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
         env:
             NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-            UPLOAD_TOKEN: ${{ secrets.REPO_TOKEN }}
       - run: npm ci
-      - run: npm run github-build
+      - run: npm run check-build
+      - name: "Check file existence"
+        uses: andstor/file-existence-action@v2
+        with:
+          files: "build.file"
+      - name: Build
+        if: steps.check_files.outputs.files_exists == 'true'
+        run: echo All files exists!
+        run: npm run prebuild -- -u ${{ secrets.REPO_TOKEN }}
+        run: npm publish --access=public
+      - name: No Build Needed
+        if: steps.check_files.outputs.files_exists == 'false'
+        run: echo No need to build
         

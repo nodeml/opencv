@@ -49,13 +49,12 @@ async function main(){
     const packageJsonVersion = packageJson['version'];
 
     if(ghVersion === packageJsonVersion){
-        console.log("Canceling build due to no version change");
+        console.log("Cancelling build")
     }
     else
     {
-        await runAndDisplay(`npm run prebuild -- -u ${process.env.UPLOAD_TOKEN}`);
-        await runAndDisplay(`npm publish --access=public`)
-        console.log(`Published new build with version v${packageJsonVersion}`)
+        await fs.promises.writeFile("build.file","\n\n")
+        console.log("Building")
     }
 }
 
