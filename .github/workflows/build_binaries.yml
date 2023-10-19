@@ -1,0 +1,23 @@
+name: Build Binaries
+
+on: [pull_request]
+branches: [ build ]
+
+jobs:
+  build_binaries:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [windows-latest, ubuntu-latest, macos-latest]
+
+    steps:
+      - uses: actions/checkout@v4
+      # Setup .npmrc file to publish to npm
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: npm
+      - run: npm ci
+      - run: npm run prebuild -- -u ${{ secrets.REPO_TOKEN }}
+        
