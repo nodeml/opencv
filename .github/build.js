@@ -53,7 +53,7 @@ async function main(){
     }
     else
     {
-        await runAndDisplay(`npm run prebuild -- -u ${process.env.GITHUB_UPLOAD_TOKEN}`);
+        await runAndDisplay(`npm run prebuild -- -u ${process.env.UPLOAD_TOKEN}`);
         await runAndDisplay(`npm publish --access=public`)
         console.log(`Published new build with version v${packageJsonVersion}`)
     }
