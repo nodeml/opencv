@@ -36,23 +36,8 @@ endif()
 # Include N-API wrappers
 IncludeNapi(${PROJECT_NAME})
 
-# Build Opencv
-if(NOT EXISTS ${OPENCV_DEPS_DIR})
-  execute_process(
-    COMMAND git clone --depth 1 --branch ${OPENCV_VERSION} https://github.com/opencv/opencv
-  )
-  execute_process(
-    COMMAND ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=Release -S "${CMAKE_CURRENT_BINARY_DIR}/opencv/" -B "${CMAKE_CURRENT_BINARY_DIR}/opencv/build/"
-  )
-  execute_process(
-    COMMAND ${CMAKE_COMMAND} --build "${CMAKE_CURRENT_BINARY_DIR}/opencv/build" --config Release
-  )
-  execute_process(
-    COMMAND ${CMAKE_COMMAND} --install "${CMAKE_CURRENT_BINARY_DIR}/opencv/build" --prefix ${OPENCV_DEPS_DIR}
-  )
-  file(REMOVE_RECURSE ${CMAKE_SOURCE_DIR}/opencv)
-endif()
-
+#Download prebuilt opencv
+DownloadBuiltDep(opencv 4.8.1 ${CMAKE_SOURCE_DIR}/deps/dynamic)
 
 #Open CV
 find_package(OpenCV REQUIRED)

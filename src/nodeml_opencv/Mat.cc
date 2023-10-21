@@ -42,7 +42,9 @@ namespace nodeml_opencv
 	{
 		try
 		{
-			return Mat::FromCv2Mat(info.Env(), mat.clone());
+			auto newMat = mat.clone();
+
+			return Mat::FromCv2Mat(info.Env(),newMat);
 		}
 		catch (const std::exception &e)
 		{
