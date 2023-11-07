@@ -87,7 +87,7 @@ namespace nodeml_opencv
         template <typename T>
         std::vector<T> vectorToNapiArray(const Napi::CallbackInfo &info)
         {
-            return std::vector<T>;
+            return std::vector<T>();
         }
 
         template <>

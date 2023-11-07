@@ -1,4 +1,4 @@
-#pragma once
+
 
 #include <napi.h>
 #include <nodeml_opencv/globals.h>

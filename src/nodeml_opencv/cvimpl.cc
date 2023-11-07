@@ -15,7 +15,7 @@ namespace nodeml_opencv
 
             try
             {
-                
+
                 auto mat = cv::imread(info[0].ToString().Utf8Value());
                 return Mat::FromCv2Mat(info.Env(), mat);
             }
@@ -44,9 +44,9 @@ namespace nodeml_opencv
             try
             {
                 cv::Mat result;
-                cv::cvtColor(Mat::FromObject(info[0])->mat,result,info[1].ToNumber().Int32Value(),info.Length() >= 3 ? info[2].ToNumber().Int32Value() : 0);
+                cv::cvtColor(Mat::FromObject(info[0])->mat, result, info[1].ToNumber().Int32Value(), info.Length() >= 3 ? info[2].ToNumber().Int32Value() : 0);
 
-                return Mat::FromCv2Mat(info.Env(),result);
+                return Mat::FromCv2Mat(info.Env(), result);
             }
             catch (const std::exception &e)
             {
