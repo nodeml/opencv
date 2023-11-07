@@ -1,5 +1,5 @@
 // From https://github.com/arition/torch-js/blob/c94aa01ee2a45921f2cb461c5b0b3e0323f3fc9d/src/FunctionWorker.h
-
+#pragma once
 
 #include <napi.h>
 
