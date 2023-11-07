@@ -10,7 +10,7 @@
   },
   "scripts": {
     "start": "node ./test.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "",
     "build": "cmake-js rebuild",
     "compile": "cmake-js compile",
     "pretty": "npx prettier --write .",
