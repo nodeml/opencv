@@ -3,7 +3,7 @@ name: Release
 on:
   pull_request:
     branches:
-      - build
+      - release
 
 jobs:
   build:
@@ -11,7 +11,7 @@ jobs:
 
     strategy:
       matrix:
-        os: [windows-latest, ubuntu-latest]
+        os: [windows-latest]
         python-version: ["3.9"]
 
     steps:
