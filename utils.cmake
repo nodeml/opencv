@@ -14,14 +14,17 @@ function(DownloadBuiltDep DEPENDENCY VERSION DESTINATION)
   endif()
 endfunction()
 
-macro(IncludeNapi project_name)
-    # Include N-API wrappers
-    execute_process(COMMAND node -p "require('node-addon-api').include"
-            WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-            OUTPUT_VARIABLE NODE_ADDON_API_DIR
-            )
-    string(REPLACE "\n" "" NODE_ADDON_API_DIR ${NODE_ADDON_API_DIR})
-    string(REPLACE "\"" "" NODE_ADDON_API_DIR ${NODE_ADDON_API_DIR})
-    target_include_directories(${project_name} PRIVATE ${NODE_ADDON_API_DIR})
-    add_definitions(-DNAPI_VERSION=3)
-endmacro()
+# Get the version from the package.json
+function(GetVersion)
+  file(READ ${CMAKE_SOURCE_DIR}/package.json PACKAGE_JSON)
+  string(JSON PACKAGE_VERSION GET ${PACKAGE_JSON} version)
+  set(PACKAGE_VERSION ${PACKAGE_VERSION} PARENT_SCOPE)
+endfunction()
+
+# generate node.lib
+function(GenerateNodeLib)
+  if(MSVC AND CMAKE_JS_NODELIB_DEF AND CMAKE_JS_NODELIB_TARGET)
+    # Generate node.lib
+    execute_process(COMMAND ${CMAKE_AR} /def:${CMAKE_JS_NODELIB_DEF} /out:${CMAKE_JS_NODELIB_TARGET} ${CMAKE_STATIC_LINKER_FLAGS})
+  endif()
+endfunction()
