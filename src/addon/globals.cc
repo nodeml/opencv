@@ -1,7 +1,7 @@
 
 
 #include <napi.h>
-#include <nodeml_opencv/globals.h>
+#include <addon/globals.h>
 #include <opencv2/core.hpp>
 #include <opencv2/imgcodecs.hpp>
 #include <opencv2/imgproc.hpp>

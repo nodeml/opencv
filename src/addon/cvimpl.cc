@@ -3,8 +3,8 @@
 #include <opencv2/imgcodecs.hpp>
 #include <opencv2/imgproc.hpp>
 #include <opencv2/highgui.hpp>
-#include <nodeml_opencv/Mat.h>
-#include <nodeml_opencv/utils.h>
+#include <addon/Mat.h>
+#include <addon/utils.h>
 
 namespace nodeml_opencv
 {

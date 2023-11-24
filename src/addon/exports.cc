@@ -1,8 +1,8 @@
 #include <napi.h>
-#include <nodeml_opencv/utils.h>
-#include <nodeml_opencv/Mat.h>
-#include <nodeml_opencv/cvimpl.h>
-#include <nodeml_opencv/globals.h>
+#include <addon/utils.h>
+#include <addon/Mat.h>
+#include <addon/cvimpl.h>
+#include <addon/globals.h>
 
 Napi::Object InitModule(Napi::Env env, Napi::Object exports)
 {

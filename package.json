@@ -11,8 +11,8 @@
   "scripts": {
     "start": "node ./test.js",
     "test": "",
-    "build": "cmake-js rebuild",
-    "compile": "cmake-js compile",
+    "cmake:rebuild": "cmake-js rebuild",
+    "cmake:build": "cmake-js build",
     "pretty": "npx prettier --write .",
     "clean": "node ./scripts/clean.js",
     "install": "prebuild-install -r napi || npm run build",
