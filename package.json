@@ -4,6 +4,11 @@
   "description": "Minimal opencv bindings for NodeJs. Functionality is added when needed",
   "main": "./lib/index.js",
   "typings": "./lib/index.d.ts",
+  "keywords": [
+    "opencv",
+    "cv2",
+    "nodeml"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nodeml/opencv.git"
