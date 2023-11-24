@@ -9,12 +9,8 @@ GetVersion()
 project(nodeml_opencv VERSION ${PACKAGE_VERSION})
 
 set(OPENCV_VERSION 4.8.1)
+
 set(CMAKE_CXX_STANDARD 17)
-
-set(OPENCV_DEPS_DIR "${CMAKE_SOURCE_DIR}/deps/opencv")
-list(APPEND CMAKE_PREFIX_PATH ${OPENCV_DEPS_DIR})
-
-list(APPEND CMAKE_PREFIX_PATH)
 
 # Build a shared library named after the project from the files in `src/`
 file(GLOB_RECURSE SOURCE_FILES "src/*.cc" "src/*.h")
@@ -30,19 +26,17 @@ target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_JS_INC})
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/src)
 
-#Download prebuilt opencv
-DownloadBuiltDep(opencv 4.8.1 ${CMAKE_SOURCE_DIR}/deps)
+#Build OpenCV
+BuildOpenCV(${OPENCV_VERSION} ${CMAKE_SOURCE_DIR}/deps OPENCV_DEPS_DIR)
+list(APPEND CMAKE_PREFIX_PATH ${OPENCV_DEPS_DIR})
 
 #Open CV
 find_package(OpenCV REQUIRED)
 include_directories(${OpenCV_INCLUDE_DIRS}) # not needed for opencv>=4.0
 target_link_libraries(${PROJECT_NAME} ${OpenCV_LIBS})
-target_include_directories(${PROJECT_NAME} PRIVATE "${OPENCV_DEPS_DIR}/include")
-
-
-# Essential library files to link to a node addon
-# You should add this line in every CMake.js based project
 target_link_libraries(${PROJECT_NAME} ${CMAKE_JS_LIB})
+target_include_directories(${PROJECT_NAME} PRIVATE ${OPENCV_DEPS_DIR}/include)
+
 
 GenerateNodeLib()
 
